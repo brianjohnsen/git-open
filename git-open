@@ -15,9 +15,9 @@ shopt -s extglob
 
 function open_url()
 {
-  case $MACHTYPE in
-    *apple*) local _open='open';;
-    *linux*) local _open='xdg-open'
+  case $1 in
+    *ccta*) local _open='firefox';;
+    *com*) local _open='xdg-open'
   esac
   echo "Running: $_open $1"
   $_open $1 &> /dev/null
@@ -62,7 +62,11 @@ fi
 # Specify the service to be used
 function url()
 {
-  if [[ $(git config remote.origin.url) =~ "github" ]]; then
+  if [[ $(git config remote.origin.url) =~ "ccta.dk" ]]; then
+    echo "https://github.ccta.dk/${repo%.*}/tree/"
+  fi
+
+  if [[ $(git config remote.origin.url) =~ "github.com" ]]; then
     echo "https://github.com/${repo%.*}/tree/"
   fi
 
