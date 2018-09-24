@@ -15,10 +15,11 @@ shopt -s extglob
 
 function open_url()
 {
-  case $1 in
-    *ccta*) local _open='firefox';;
-    *com*) local _open='xdg-open'
-  esac
+  local _open='xdg-open'
+  if [[ $(git config remote.origin.url) =~ "ccta.dk" ]]; then
+    local _open='firefox'
+  fi
+
   echo "Running: $_open $1"
   $_open $1 &> /dev/null
 }
