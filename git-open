@@ -16,7 +16,8 @@ shopt -s extglob
 function open_url()
 {
   local _open='xdg-open'
-  if [[ $(git config remote.origin.url) =~ "ccta.dk" ]]; then
+  # Work opens in firefox
+  if [[ $(git config remote.origin.url) =~ "ccta.dk" ]] || [[ $(git config remote.origin.url) =~ "rep.erst.dk" ]]; then
     local _open='firefox'
   fi
 
@@ -65,6 +66,10 @@ function url()
 {
   if [[ $(git config remote.origin.url) =~ "ccta.dk" ]]; then
     echo "https://github.ccta.dk/${repo%.*}/tree/"
+  fi
+
+  if [[ $(git config remote.origin.url) =~ "rep.erst.dk" ]]; then
+    echo "https://rep.erst.dk/git/${repo%.*}/tree/"
   fi
 
   if [[ $(git config remote.origin.url) =~ "github.com" ]]; then
